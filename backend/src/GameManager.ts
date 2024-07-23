@@ -1,5 +1,5 @@
 import WebSocket from "ws";
-import { INIT_GAME } from "./message";
+import { INIT_GAME, MOVE } from "./message";
 import { Game } from "./Game";
 
 
@@ -18,7 +18,7 @@ export class GameManager{
         this.handler(socket);
     }
     removeUser(socket:WebSocket){
-
+        this.users=this.users.filter(user=>user!=socket)
     }
 
     private handler(socket:WebSocket){
@@ -37,7 +37,8 @@ export class GameManager{
             if(message.type===MOVE){
                 const game=this.games.find(game=>game.player1===socket || game.player2===socket);
                 if(game){
-
+                    console.log("in makemove");
+                    game.makeMove(socket,message.move);
                 }
             }
         })
