@@ -34,6 +34,12 @@ export class GameManager{
                     this.pendingUser=null;
                 }
             }
+            if(message.type===MOVE){
+                const game=this.games.find(game=>game.player1===socket || game.player2===socket);
+                if(game){
+
+                }
+            }
         })
     }
 }
